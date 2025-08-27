@@ -9,12 +9,10 @@
 
 *   Created `docker-compose.yml` to define the services.
 *   Created `init.sql` to initialize the database schema.
-*   Attempted to configure PostgreSQL replication but encountered issues.
+*   Successfully configured PostgreSQL replication.
 
 **Next Steps:**
 
-1.  Review the `docker-compose.yml` file to ensure correct configuration of PostgreSQL replication.
-2.  Test the replication setup to verify that data is being replicated correctly.
 3.  Implement the Payment Service API.
 
 **Active Decisions and Considerations:**

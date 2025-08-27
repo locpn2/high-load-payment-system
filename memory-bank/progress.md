@@ -7,7 +7,7 @@
 
 **What's Left to Build:**
 
-*   Configure PostgreSQL replication correctly.
+- [x] Configure PostgreSQL replication correctly.
 *   Implement Payment Service API.
 *   Implement Payment Worker (Kafka Consumer).
 *   Implement Cache invalidation mechanism.
@@ -22,11 +22,11 @@
 **Current Status:**
 
 *   Development environment setup in progress.
-*   PostgreSQL replication is not yet working correctly.
+*   PostgreSQL replication is working correctly.
 
 **Known Issues:**
 
-*   PostgreSQL replicas are failing to start due to configuration issues.
+*   None
 
 **Evolution of Project Decisions:**
 
