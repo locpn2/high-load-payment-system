@@ -20,9 +20,10 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,BROKER://localhost:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092,BROKER://kafka:9093
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,BROKER:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: BROKER
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,BROKER://0.0.0.0:9093
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   postgres:
@@ -34,8 +35,10 @@ services:
       POSTGRES_USER: example
       POSTGRES_PASSWORD: example
       POSTGRES_DB: payment_db
+      POSTGRES_INITDB_ARGS: "--auth-host=trust"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - ./pg_hba.conf:/etc/postgresql/pg_hba.conf
+    command: ["postgres", "-c", "wal_level=replica", "-c", "max_wal_senders=10", "-c", "hot_standby=on", "-c", "listen_addresses=*", "-c", "hba_file=/etc/postgresql/pg_hba.conf"]
 
   postgres-replica1:
     image: postgres:14
@@ -50,7 +53,8 @@ services:
       POSTGRES_DB: payment_db
     volumes:
       - postgres_replica1_data:/var/lib/postgresql/data
-    command: ["-c", "host=postgres user=example password=example dbname=payment_db replication=true"]
+    user: "postgres"
+    command: ["/bin/bash", "-c", "chown -R postgres:postgres /var/lib/postgresql/data && chmod 700 /var/lib/postgresql/data && until pg_isready -h postgres -p 5432 -U example; do echo waiting for postgres; sleep 2; done; rm -rf /var/lib/postgresql/data/*; pg_basebackup -h postgres -p 5432 -U example -D /var/lib/postgresql/data -F p -Xs -P -R; postgres -c 'hot_standby=on'"]
 
   postgres-replica2:
     image: postgres:14
@@ -65,7 +69,8 @@ services:
       POSTGRES_DB: payment_db
     volumes:
       - postgres_replica2_data:/var/lib/postgresql/data
-    command: ["-c", "host=postgres user=example password=example dbname=payment_db replication=true"]
+    user: "postgres"
+    command: ["/bin/bash", "-c", "chown -R postgres:postgres /var/lib/postgresql/data && chmod 700 /var/lib/postgresql/data && until pg_isready -h postgres -p 5432 -U example; do echo waiting for postgres; sleep 2; done; rm -rf /var/lib/postgresql/data/*; pg_basebackup -h postgres -p 5432 -U example -D /var/lib/postgresql/data -F p -Xs -P -R; postgres -c 'hot_standby=on'"]
 
   redis:
     image: redis:latest
