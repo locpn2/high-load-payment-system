@@ -9,6 +9,11 @@
 
 - [x] Configure PostgreSQL replication correctly.
 *   Implement Payment Service API.
+    *   Defined data model (Payment entity)
+    *   Implemented PaymentRepository
+    *   Implemented PaymentService
+*   Defined API endpoints in PaymentController
+*   Configured application.yml
 *   Implement Payment Worker (Kafka Consumer).
 *   Implement Cache invalidation mechanism.
 *   Implement Inquiry Service API.
