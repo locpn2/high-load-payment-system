@@ -80,6 +80,7 @@ public class PaymentController {
         payment.setAmount(paymentRequest.getAmount());
         payment.setCurrency(paymentRequest.getCurrency());
         payment.setPaymentMethod(paymentRequest.getPaymentMethod());
+        payment.setStatus("PENDING"); // Set default status
         return payment;
     }
 }

@@ -33,5 +33,40 @@ public class Payment {
     @Column(nullable = false)
     private String status;
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    // Explicit getter for id (needed by PaymentWorker)
+    public Long getId() {
+        return id;
+    }
+
+    // Explicit getters for PaymentService
+    public String getOrderId() {
+        return orderId;
+    }
+
+    public java.math.BigDecimal getAmount() {
+        return amount;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    // Explicit setter for id (needed by PaymentService)
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     // Các trường khác (ví dụ: thông tin người dùng, thời gian tạo)
 }

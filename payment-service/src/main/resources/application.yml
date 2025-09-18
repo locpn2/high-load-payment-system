@@ -5,9 +5,9 @@ spring:
   application:
     name: payment-service
   datasource:
-    url: jdbc:postgresql://localhost:5432/paymentsdb
-    username: paymentsuser
-    password: paymentspassword
+    url: jdbc:postgresql://localhost:5432/payment_db
+    username: example
+    password: example
   jpa:
     hibernate:
       ddl-auto: update
@@ -26,6 +26,7 @@ spring:
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: com.example.payment_service.dto
+    topic: payment-topic
 
 redis:
   host: localhost
