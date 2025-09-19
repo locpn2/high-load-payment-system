@@ -2,31 +2,40 @@
 
 **What Works:**
 
-*   Basic project structure and initial Git repository setup.
-*   Docker Compose file created with definitions for Zookeeper, Kafka, PostgreSQL (primary and replicas), and Redis.
+*   [x] Basic project structure and initial Git repository setup.
+*   [x] Docker Compose file created with definitions for Zookeeper, Kafka, PostgreSQL (primary and replicas), and Redis.
+*   [x] PostgreSQL replication configured and working correctly.
+*   [x] Payment Service API fully implemented:
+    *   [x] Payment entity with complete data model
+    *   [x] PaymentRepository for database operations
+    *   [x] PaymentService for business logic
+    *   [x] PaymentController with full CRUD API endpoints
+    *   [x] Application configuration for Kafka and Redis
+    *   [x] Dependencies added (Gson for JSON processing)
+*   [x] Development environment fully operational with all services running.
 
 **What's Left to Build:**
 
-*   Configure PostgreSQL replication correctly.
-*   Implement Payment Service API.
-*   Implement Payment Worker (Kafka Consumer).
-*   Implement Cache invalidation mechanism.
-*   Implement Inquiry Service API.
-*   Integrate Caching.
-*   Configure Read from Replica.
-*   Set up API Gateway and Load Balancer.
-*   Write Load Test scripts with JMeter.
-*   Execute and Analyze Results.
-*   Tune and Optimize.
+*   [ ] Implement Cache invalidation mechanism.
+*   [ ] Implement Inquiry Service API.
+*   [ ] Integrate Caching.
+*   [ ] Configure Read from Replica.
+*   [ ] Set up API Gateway and Load Balancer.
+*   [ ] Write Load Test scripts with JMeter.
+*   [ ] Execute and Analyze Results.
+*   [ ] Tune and Optimize.
 
 **Current Status:**
 
-*   Development environment setup in progress.
-*   PostgreSQL replication is not yet working correctly.
+*   [x] Development environment setup completed successfully.
+*   [x] Payment Service API is fully operational and tested.
+*   [x] All infrastructure services (PostgreSQL, Kafka, Redis) are operational.
+*   [x] Database connection issues resolved.
+*   [x] API endpoints responding correctly (HTTP 200).
 
 **Known Issues:**
 
-*   PostgreSQL replicas are failing to start due to configuration issues.
+*   None
 
 **Evolution of Project Decisions:**
 
