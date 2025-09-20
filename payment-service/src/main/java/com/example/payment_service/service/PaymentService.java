@@ -42,22 +42,22 @@ public class PaymentService {
     }
 
     public Payment createPayment(Payment payment) {
-        // Save payment to database first
-        Payment savedPayment = paymentRepository.save(payment);
-        LOGGER.info("Payment saved to database with ID: {}", savedPayment.getId());
-
         // Send payment request to Kafka for async processing
         try {
-            PaymentRequest paymentRequest = convertToPaymentRequest(savedPayment);
+            PaymentRequest paymentRequest = convertToPaymentRequest(payment);
             String message = gson.toJson(paymentRequest);
             kafkaTemplate.send(kafkaTopic, message);
             LOGGER.info("Payment message sent to Kafka topic: {}", kafkaTopic);
+
+            // Set status to indicate it's being processed
+            payment.setStatus("PROCESSING");
+            return payment;
         } catch (Exception e) {
             LOGGER.error("Failed to send payment message to Kafka: {}", e.getMessage());
             // In production, you might want to implement a retry mechanism or dead letter queue
+            payment.setStatus("FAILED");
+            return payment;
         }
-
-        return savedPayment;
     }
 
     public Payment updatePayment(Long id, Payment payment) {
