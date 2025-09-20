@@ -16,6 +16,7 @@
 
 **What's Left to Build:**
 
+*   [x] **Decouple Payment Worker from Payment Service** - COMPLETE
 *   [ ] Implement Cache invalidation mechanism.
 *   [ ] Implement Inquiry Service API.
 *   [ ] Integrate Caching.
