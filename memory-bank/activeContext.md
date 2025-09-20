@@ -2,8 +2,7 @@
 
 **Current Work Focus:**
 
-*   [x] Payment Worker (Kafka Consumer) has been successfully implemented.
-*   [x] Asynchronous payment processing is now operational.
+*   [x] **Decoupled Payment Worker from Payment Service** - COMPLETE
 *   [ ] Ready to implement Cache invalidation mechanism and Inquiry Service.
 *   [ ] Planning integration of Redis caching and PostgreSQL replica reading.
 
@@ -17,6 +16,14 @@
 *   [x] Added proper error handling and logging throughout the system.
 *   [x] Verified Payment Service API endpoints are operational (HTTP 200 responses).
 *   [x] Updated project progress documentation.
+*   [x] **Bước 1 hoàn thành**: Khởi tạo dự án `payment-worker` với cấu trúc Spring Boot cơ bản.
+*   [x] **Bước 2 hoàn thành**: Di chuyển và tách biệt mã nguồn (PaymentWorker, PaymentRequest, Payment, PaymentRepository).
+*   [x] **Bước 3 hoàn thành**: Cấu hình cho `payment-worker` (application.yml với port 8081, Kafka consumer, database).
+*   [x] **Bước 4 hoàn thành**: Tái cấu trúc `payment-service` (xóa thư mục worker, cập nhật PaymentService để chỉ gửi Kafka message).
+*   [x] **Bước 5 hoàn thành**: Cập nhật Cấu hình Triển khai (Docker Compose) - thêm service payment-worker.
+*   [x] **Bước 6 hoàn thành**: Kiểm thử và Xác minh - cả payment-service và payment-worker đều compile thành công.
+*   [x] **Fixed Docker build error**: Created Dockerfiles for both services and updated docker-compose.yml.
+*   [x] **Fixed "Broker may not be available" error**: Updated application.yml files to use Spring Profiles for Docker environment.
 
 **Next Steps:**
 
