@@ -28,6 +28,16 @@ spring:
           max-idle: 8
           min-idle: 0
 
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: inquiry-service-cache-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      auto-offset-reset: earliest
+      properties:
+        spring.json.trusted.packages: com.example.inquiry_service.dto
+
 logging:
   level:
     org.springframework: INFO
