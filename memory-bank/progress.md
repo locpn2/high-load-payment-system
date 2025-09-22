@@ -48,6 +48,7 @@
 **Known Issues:**
 
 *   None
+*   **Fixed**: Kafka connection error in inquiry-service - Added Docker profile configuration to use `kafka:9093` instead of `localhost:9092` for Kafka bootstrap servers.
 
 **Evolution of Project Decisions:**
 

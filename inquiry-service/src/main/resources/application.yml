@@ -38,6 +38,15 @@ spring:
       properties:
         spring.json.trusted.packages: com.example.inquiry_service.dto
 
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  kafka:
+    consumer:
+      bootstrap-servers: kafka:9093
+
 logging:
   level:
     org.springframework: INFO

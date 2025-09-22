@@ -33,6 +33,7 @@
 *   [x] **Bước 3 hoàn thành**: Triển khai PaymentRepository interface với các truy vấn cần thiết.
 *   [x] **Bước 4 hoàn thành**: Triển khai InquiryService với logic Cache-Aside pattern và InquiryController với REST endpoints.
 *   [x] **Bước 5 hoàn thành**: Tạo Dockerfile cho inquiry-service và cập nhật docker-compose.yml.
+*   [x] **Fixed Kafka connection error in inquiry-service**: Added Docker profile configuration to use `kafka:9093` instead of `localhost:9092` for Kafka bootstrap servers.
 
 **Next Steps:**
 
