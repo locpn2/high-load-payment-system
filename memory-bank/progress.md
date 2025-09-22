@@ -30,7 +30,7 @@
 *   [x] **Giai đoạn 1: Xây dựng Inquiry Service & Tích hợp Caching** - COMPLETE
 *   [x] **Giai đoạn 2: Triển khai Cơ chế Vô hiệu hóa Cache (Cache Invalidation)** - COMPLETE
 *   [x] **Refactored CacheInvalidationListener to use InquiryService.invalidateCache()** - COMPLETE
-*   [ ] **Giai đoạn 3: Cấu hình API Gateway và Load Balancer (Nginx)**
+*   [x] **Giai đoạn 3: Cấu hình API Gateway và Load Balancer (Nginx)** - COMPLETE
 *   [ ] **Giai đoạn 4: Kiểm thử và Tối ưu hóa**
 
 **Current Status:**
