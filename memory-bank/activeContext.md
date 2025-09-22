@@ -6,6 +6,8 @@
 *   [x] **Khởi tạo project `inquiry-service`** - COMPLETE
 *   [x] **Implementing Cache invalidation mechanism and Inquiry Service** - COMPLETE
 *   [x] **Integrating Redis caching and PostgreSQL replica reading** - COMPLETE
+*   [x] **Giai đoạn 1: Xây dựng Inquiry Service & Tích hợp Caching** - COMPLETE
+*   [x] **Giai đoạn 2: Triển khai Cơ chế Vô hiệu hóa Cache (Cache Invalidation)** - COMPLETE
 
 **Recent Changes:**
 
@@ -34,20 +36,17 @@
 
 **Next Steps:**
 
-1.  [ ] **Configure `inquiry-service` to read from Database Replica:**
-    *   [ ] Copy Payment entity and PaymentRequest from payment-worker to inquiry-service.
-    *   [ ] Configure application.yml to connect to PostgreSQL replica.
-    *   [ ] Set up Redis connection configuration.
-2.  [ ] **Implement Inquiry Service API and Cache-Aside Logic:**
-    *   [ ] Create PaymentRepository interface.
-    *   [ ] Implement InquiryService with Cache-Aside pattern.
-    *   [ ] Create InquiryController with API endpoints.
-    *   [ ] Add Redis caching logic for balance and transaction queries.
-3.  [ ] **Update Docker Configuration:**
-    *   [ ] Create Dockerfile for inquiry-service.
-    *   [ ] Add inquiry-service to docker-compose.yml.
-4.  [ ] Implement Cache invalidation mechanism for Redis.
-5.  [ ] Set up API Gateway and Load Balancer.
+1.  [ ] **Giai đoạn 3: Cấu hình API Gateway và Load Balancer (Nginx)**
+    *   [ ] Tạo file cấu hình cho Nginx (`nginx.conf`).
+    *   [ ] Định nghĩa các `upstream` cho từng service (`payment-service`, `inquiry-service`).
+    *   [ ] Thiết lập `location blocks` để điều hướng request dựa trên URL.
+    *   [ ] Cập nhật `docker-compose.yml` để thêm service `nginx`.
+
+2.  [ ] **Giai đoạn 4: Kiểm thử và Tối ưu hóa**
+    *   [ ] Kiểm thử End-to-End toàn bộ luồng hệ thống.
+    *   [ ] Viết kịch bản kiểm thử tải bằng JMeter.
+    *   [ ] Thực thi load test và phân tích kết quả.
+    *   [ ] Tối ưu hóa hiệu suất dựa trên kết quả kiểm thử.
 
 **Active Decisions and Considerations:**
 
@@ -63,6 +62,7 @@
 *   Following a microservices architecture.
 *   Prioritizing reliability and low latency.
 *   Implementing asynchronous processing with Kafka.
+*   Refactoring CacheInvalidationListener to use InquiryService.invalidateCache() method for better code reusability and maintainability.
 
 **Learnings and Project Insights:**
 
