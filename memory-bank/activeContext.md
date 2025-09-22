@@ -37,11 +37,13 @@
 
 **Next Steps:**
 
-1.  [ ] **Giai đoạn 3: Cấu hình API Gateway và Load Balancer (Nginx)**
-    *   [ ] Tạo file cấu hình cho Nginx (`nginx.conf`).
-    *   [ ] Định nghĩa các `upstream` cho từng service (`payment-service`, `inquiry-service`).
-    *   [ ] Thiết lập `location blocks` để điều hướng request dựa trên URL.
-    *   [ ] Cập nhật `docker-compose.yml` để thêm service `nginx`.
+1.  [x] **Giai đoạn 3: Cấu hình API Gateway và Load Balancer (Nginx)** - COMPLETE
+    *   [x] Tạo nhánh mới `feat/nginx-api-gateway`.
+    *   [x] Tạo file cấu hình cho Nginx (`nginx.conf`).
+    *   [x] Định nghĩa các `upstream` cho từng service (`payment-service`, `inquiry-service`).
+    *   [x] Thiết lập `location blocks` để điều hướng request dựa trên URL.
+    *   [x] Cập nhật `docker-compose.yml` để thêm service `nginx`.
+    *   [x] Xác minh cấu hình Docker Compose thành công.
 
 2.  [ ] **Giai đoạn 4: Kiểm thử và Tối ưu hóa**
     *   [ ] Kiểm thử End-to-End toàn bộ luồng hệ thống.

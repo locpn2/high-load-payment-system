@@ -151,6 +151,19 @@ services:
     networks:
       - payment-network
 
+  nginx:
+    image: nginx:latest
+    hostname: nginx
+    depends_on:
+      - payment-service
+      - inquiry-service
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    networks:
+      - payment-network
+
 volumes:
   postgres_data:
   postgres_replica1_data:
