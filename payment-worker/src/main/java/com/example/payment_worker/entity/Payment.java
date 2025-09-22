@@ -68,5 +68,22 @@ public class Payment {
         this.id = id;
     }
 
+    // Explicit setters for PaymentWorker
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setAmount(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
     // Các trường khác (ví dụ: thông tin người dùng, thời gian tạo)
 }

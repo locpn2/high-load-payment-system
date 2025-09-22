@@ -23,6 +23,10 @@ spring:
       properties:
         spring.json.trusted.packages: com.example.payment_worker.dto
     topic: payment-topic
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 ---
 spring:
@@ -42,3 +46,7 @@ spring:
       properties:
         spring.json.trusted.packages: com.example.payment_worker.dto
     topic: payment-topic
+    producer:
+      bootstrap-servers: kafka:9093
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer

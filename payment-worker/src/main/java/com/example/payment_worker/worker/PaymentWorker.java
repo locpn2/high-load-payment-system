@@ -4,12 +4,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import com.example.payment_worker.dto.PaymentRequest;
 import com.example.payment_worker.entity.Payment;
 import com.example.payment_worker.repository.PaymentRepository;
 import com.google.gson.Gson;
+
+import java.math.BigDecimal;
 
 @Component
 public class PaymentWorker {
@@ -18,6 +21,9 @@ public class PaymentWorker {
 
     @Autowired
     private PaymentRepository paymentRepository;
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
     private final Gson gson;
 
@@ -41,6 +47,20 @@ public class PaymentWorker {
             // Save to database
             Payment savedPayment = paymentRepository.save(payment);
             LOGGER.info("Payment processed successfully with ID: {}", savedPayment.getId());
+
+            // Send cache invalidation message to Kafka
+            try {
+                String orderId = paymentRequest.getOrderId();
+                if (orderId != null) {
+                    kafkaTemplate.send("payment-updates", orderId);
+                    LOGGER.info("Cache invalidation message sent for order: {}", orderId);
+                } else {
+                    LOGGER.warn("OrderId is null, cannot send cache invalidation message");
+                }
+            } catch (Exception e) {
+                LOGGER.error("Error sending cache invalidation message: {}", e.getMessage(), e);
+                // Note: We don't fail the payment processing if cache invalidation fails
+            }
 
         } catch (Exception e) {
             LOGGER.error("Error processing payment message: {}", e.getMessage(), e);
