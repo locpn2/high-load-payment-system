@@ -1,0 +1,171 @@
+{
+  "info": {
+    "_postman_id": "inquiry-service-collection",
+    "name": "Inquiry Service API",
+    "description": "Postman collection for testing Inquiry Service endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8082/api/v1/inquiries/health",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["api", "v1", "inquiries", "health"]
+        },
+        "description": "Health check endpoint to verify service status"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Account Balance",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8082/api/v1/inquiries/balance/12345",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["api", "v1", "inquiries", "balance", "12345"],
+          "variable": [
+            {
+              "key": "accountId",
+              "value": "12345",
+              "description": "Account ID to get balance for"
+            }
+          ]
+        },
+        "description": "Get account balance by account ID"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Account Balance - Test Account 67890",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8082/api/v1/inquiries/balance/67890",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["api", "v1", "inquiries", "balance", "67890"]
+        },
+        "description": "Get balance for test account 67890"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Transaction History",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8082/api/v1/inquiries/transactions/12345",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["api", "v1", "inquiries", "transactions", "12345"],
+          "variable": [
+            {
+              "key": "accountId",
+              "value": "12345",
+              "description": "Account ID to get transaction history for"
+            }
+          ]
+        },
+        "description": "Get transaction history by account ID"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Transaction History - Test Account 67890",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8082/api/v1/inquiries/transactions/67890",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["api", "v1", "inquiries", "transactions", "67890"]
+        },
+        "description": "Get transaction history for test account 67890"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Balance - Non-existent Account",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8082/api/v1/inquiries/balance/99999",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["api", "v1", "inquiries", "balance", "99999"]
+        },
+        "description": "Test error handling with non-existent account ID"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Transactions - Non-existent Account",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:8082/api/v1/inquiries/transactions/99999",
+          "host": ["localhost"],
+          "port": "8082",
+          "path": ["api", "v1", "inquiries", "transactions", "99999"]
+        },
+        "description": "Test error handling with non-existent account ID for transactions"
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8082",
+      "type": "string"
+    }
+  ]
+}

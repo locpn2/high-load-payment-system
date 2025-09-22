@@ -63,8 +63,9 @@ services:
       POSTGRES_DB: payment_db
     volumes:
       - postgres_replica1_data:/var/lib/postgresql/data
+      - ./init-replica.sh:/init-replica.sh:ro
     user: "postgres"
-    command: ["/bin/bash", "-c", "chown -R postgres:postgres /var/lib/postgresql/data && chmod 700 /var/lib/postgresql/data && until pg_isready -h postgres -p 5432 -U example; do echo waiting for postgres; sleep 2; done; rm -rf /var/lib/postgresql/data/*; pg_basebackup -h postgres -p 5432 -U example -D /var/lib/postgresql/data -F p -Xs -P -R; postgres -c 'hot_standby=on'"]
+    command: ["/bin/bash", "/init-replica.sh"]
     networks:
       - payment-network
 
@@ -81,8 +82,9 @@ services:
       POSTGRES_DB: payment_db
     volumes:
       - postgres_replica2_data:/var/lib/postgresql/data
+      - ./init-replica.sh:/init-replica.sh:ro
     user: "postgres"
-    command: ["/bin/bash", "-c", "chown -R postgres:postgres /var/lib/postgresql/data && chmod 700 /var/lib/postgresql/data && until pg_isready -h postgres -p 5432 -U example; do echo waiting for postgres; sleep 2; done; rm -rf /var/lib/postgresql/data/*; pg_basebackup -h postgres -p 5432 -U example -D /var/lib/postgresql/data -F p -Xs -P -R; postgres -c 'hot_standby=on'"]
+    command: ["/bin/bash", "/init-replica.sh"]
     networks:
       - payment-network
 
@@ -128,6 +130,24 @@ services:
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9093
       SPRING_KAFKA_TOPIC: payment-topic
       SPRING_KAFKA_CONSUMER_GROUP_ID: payment-worker-group
+    networks:
+      - payment-network
+
+  inquiry-service:
+    build: ./inquiry-service
+    hostname: inquiry-service
+    depends_on:
+      - postgres-replica1
+      - redis
+    ports:
+      - "8082:8082"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-replica1:5432/payment_db
+      SPRING_DATASOURCE_USERNAME: example
+      SPRING_DATASOURCE_PASSWORD: example
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
     networks:
       - payment-network
 
