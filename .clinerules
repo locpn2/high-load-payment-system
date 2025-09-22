@@ -92,29 +92,128 @@ BREAKING CHANGE: the old `/api/customers/find` endpoint is removed
 
 - Do not force push to the remote repository (`git push --force` or `git push -f`). This can overwrite history and cause issues for other collaborators.
 
-## Reminder - Instructions for Tool Use
+## Pull Request Creation Rules
 
-- Tool uses are formatted using XML-style tags. The tool name is enclosed in opening and closing tags, and each parameter is similarly enclosed within its own set of tags. **Note that XML tags are case-sensitive.** Here's the structure:
+**Format**: Use the following structure for Pull Request titles and descriptions:
 
-**Format**: Use the **Tool Use** format:
-
-```xml
-<tool_name>
-    <parameter1_name>value1</parameter1_name>
-    <parameter2_name>value2</parameter2_name>
-    ...
-</tool_name>
+### Title Format
+```
+<type>(scope): <short description>
 ```
 
-**Example**:
+**Allowed Types** (same as commit types)
+- `feat`: A new feature
+- `fix`: A bug fix
+- `refactor`: Code changes that neither fix a bug nor add a feature
+- `chore`: Routine tasks, build process, or auxiliary tool changes
+- `docs`: Documentation updates
+- `style`: Code style changes (e.g., formatting, missing semicolons)
+- `test`: Adding or updating tests
 
-```xml
-<attempt_completion>
-    <result>I have completed the task...</result>
-</attempt_completion>
+**Scope Examples**
+- `payment-service`: Changes to payment service
+- `payment-worker`: Changes to payment worker
+- `inquiry-service`: Changes to inquiry service
+- `infra`: Infrastructure changes (Docker, database, etc.)
+- `memory-bank`: Documentation updates
+
+### Body Format
+```
+This pull request [brief description of what the PR accomplishes].
+
+## Changes Included:
+
+- **[type](scope)**: [Brief description of change 1]
+- **[type](scope)**: [Brief description of change 2]
+- **[type](scope)**: [Brief description of change N]
+
+## Key Features:
+
+- **[Feature 1]**: [Description of feature 1]
+- **[Feature 2]**: [Description of feature 2]
+- **[Feature N]**: [Description of feature N]
+
+[Additional context, breaking changes, or migration notes if applicable]
 ```
 
-Always adhere to this format for all tool uses to ensure proper parsing and execution.
+**Examples**
+```
+feat(payment-service): Integrate payment service and Kafka worker
+
+This pull request integrates the payment service and Kafka worker functionality onto the master branch.
+
+## Changes Included:
+
+- **feat(payment-service)**: Implement Payment Service API with full CRUD operations
+- **feat(payment-worker)**: Implement asynchronous payment processing with Kafka consumer
+- **chore(memory-bank)**: Update activeContext.md and progress.md to reflect latest project status
+- **docs(memory-bank)**: Update progress documentation for Payment Service API implementation
+
+## Key Features:
+
+- Complete Payment Service API with Spring Boot
+- Asynchronous payment processing using Kafka
+- Database integration with PostgreSQL
+- Proper error handling and logging
+- Docker Compose environment setup
+
+These changes establish the core payment processing infrastructure for the high-load payment system.
+```
+
+**Guidelines**:
+- Use clear, descriptive titles that follow the conventional commit format
+- Provide comprehensive descriptions that explain the purpose and impact of changes
+- List all significant changes with their types and scopes
+- Highlight key features and benefits
+- Include technical details that reviewers need to understand the implementation
+- Mention any breaking changes or migration requirements
+- Keep the description focused and avoid unnecessary technical jargon
+
+## Pull Request Comment Rules
+
+**Format**: Use the following structure for Pull Request comments:
+
+```
+## Pull Request Review #<PR_NUMBER>: <PR_TITLE>
+
+### Overview
+[Overview of the PR, its objectives and impact]
+
+### Detailed Review
+
+#### ✅ Positive Aspects
+- [Positive aspect 1]
+- [Positive aspect 2]
+- [Positive aspect N]
+
+#### 🔧 Areas for Improvement
+##### 1. [Title of improvement point 1]
+[Detailed description of the issue and proposed improvement]
+
+##### 2. [Title of improvement point 2]
+[Detailed description of the issue and proposed improvement]
+
+##### N. [Title of improvement point N]
+[Detailed description of the issue and proposed improvement]
+
+### Conclusion
+[Overall review summary and recommendation]
+
+**Recommendation**: [Approve/Reject/Request Changes] PR. [Reason and next steps if needed]
+
+### PR Statistics
+- [number] commits
+- [number] lines added
+- [number] lines deleted
+- [number] files changed
+```
+
+**Guidelines**:
+- Use emoji ✅ for positive aspects and 🔧 for areas for improvement
+- Provide specific and constructive descriptions for areas for improvement
+- Offer specific suggestions to resolve issues
+- End with a clear recommendation (Approve/Reject/Request Changes)
+- Include PR statistics to provide an overview of the change scope
 
 # Cline's Memory Bank
 
