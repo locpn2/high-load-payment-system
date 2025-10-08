@@ -20,6 +20,8 @@
 *   Cache-Aside pattern for managing data in Redis.
 *   Asynchronous processing pattern for handling payment transactions.
 *   Connection Pool pattern for managing database connections.
+*   **Saga Pattern (Orchestration)**: For distributed transaction management across microservices.
+*   **Transactional Outbox Pattern**: For reliable event publishing with database transactions.
 
 **Component Relationships:**
 

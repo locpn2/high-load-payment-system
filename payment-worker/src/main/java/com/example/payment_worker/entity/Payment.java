@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Entity
 @Table(name = "payments")
@@ -32,6 +33,26 @@ public class Payment {
 
     @Column(nullable = false)
     private String status;
+
+    // Saga Pattern fields
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private SagaStatus sagaStatus = SagaStatus.PENDING;
+
+    @Column(nullable = false)
+    private UUID transactionId;
+
+    @Column
+    private String failureReason;
+
+    public enum SagaStatus {
+        PENDING,        // Initial state
+        PROCESSING,     // Payment is being processed
+        ACCOUNT_UPDATED, // Account has been updated
+        COMPLETED,      // Payment completed successfully
+        FAILED,         // Payment failed
+        CANCELED        // Payment canceled due to compensation
+    }
 
     public void setStatus(String status) {
         this.status = status;
@@ -83,6 +104,44 @@ public class Payment {
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    // Saga-related methods
+    public void initiateSaga(UUID transactionId) {
+        this.transactionId = transactionId;
+        this.sagaStatus = SagaStatus.PENDING;
+    }
+
+    public void startProcessing() {
+        this.sagaStatus = SagaStatus.PROCESSING;
+    }
+
+    public void accountUpdated() {
+        this.sagaStatus = SagaStatus.ACCOUNT_UPDATED;
+    }
+
+    public void completeSaga() {
+        this.sagaStatus = SagaStatus.COMPLETED;
+    }
+
+    public void failSaga(String reason) {
+        this.sagaStatus = SagaStatus.FAILED;
+        this.failureReason = reason;
+    }
+
+    public void cancelSaga(String reason) {
+        this.sagaStatus = SagaStatus.CANCELED;
+        this.failureReason = reason;
+    }
+
+    // Getter for sagaStatus
+    public SagaStatus getSagaStatus() {
+        return sagaStatus;
+    }
+
+    // Setter for sagaStatus
+    public void setSagaStatus(SagaStatus sagaStatus) {
+        this.sagaStatus = sagaStatus;
     }
 
     // Các trường khác (ví dụ: thông tin người dùng, thời gian tạo)

@@ -73,3 +73,6 @@
 *   Docker Compose can simplify the deployment and management of complex systems.
 *   Spring Boot with Kafka integration provides robust asynchronous processing capabilities.
 *   Proper caching strategies are crucial for high-read scenarios.
+*   **Saga Pattern** provides a robust way to handle distributed transactions in microservices architecture.
+*   **Transactional Outbox Pattern** ensures reliable event publishing without dual writes issues.
+*   **Debezium CDC** enables real-time data synchronization between databases and event streams.

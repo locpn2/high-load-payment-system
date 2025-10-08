@@ -31,7 +31,17 @@
 *   [x] **Giai đoạn 2: Triển khai Cơ chế Vô hiệu hóa Cache (Cache Invalidation)** - COMPLETE
 *   [x] **Refactored CacheInvalidationListener to use InquiryService.invalidateCache()** - COMPLETE
 *   [x] **Giai đoạn 3: Cấu hình API Gateway và Load Balancer (Nginx)** - COMPLETE
+*   [x] **Triển khai Saga Pattern và Transactional Outbox Pattern** - COMPLETE
 *   [ ] **Giai đoạn 4: Kiểm thử và Tối ưu hóa**
+    *   [x] Viết unit tests cơ bản cho Saga implementation (cần cải thiện Lombok config)
+    *   [ ] Kiểm thử end-to-end cho luồng Saga (sẽ bao gồm):
+        *   [ ] Khởi động toàn bộ hệ thống với Docker Compose
+        *   [ ] Cấu hình Debezium connector cho outbox table
+        *   [ ] Gửi payment request qua payment-service
+        *   [ ] Xác minh Saga events được publish qua Kafka
+        *   [ ] Kiểm tra trạng thái payment được cập nhật đúng cách
+        *   [ ] Test compensating transactions khi có lỗi
+        *   [ ] Load testing với JMeter để đánh giá hiệu suất
 
 **Current Status:**
 
